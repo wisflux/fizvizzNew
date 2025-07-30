@@ -18,14 +18,25 @@ export const GroupCard = ({ item, onPress }) => {
     >
       <Card.Content>
         <View style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-          <Avatar.Icon
-            size={48}
-            icon={item.icon}
-            style={{ 
-              backgroundColor: item.backgroundColor, 
-              marginRight: 12 
-            }}
-          />
+          {item.avatar ? (
+            <Avatar.Image
+              size={48}
+              source={item.avatar}
+              style={{ 
+                backgroundColor: item.backgroundColor,
+                marginRight: 12 
+              }}
+            />
+          ) : (
+            <Avatar.Icon
+              size={48}
+              icon={item.icon}
+              style={{ 
+                backgroundColor: item.backgroundColor, 
+                marginRight: 12 
+              }}
+            />
+          )}
           
           <View style={{ flex: 1 }}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
