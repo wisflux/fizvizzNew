@@ -95,10 +95,43 @@ export const ProfileScreen = ({ onBack }) => {
 
       <ScrollView>
         {/* Profile Info */}
-        <View style={{ alignItems: 'center', paddingHorizontal: 16 }}>
+        <View style={{ alignItems: 'center', paddingHorizontal: 16, position: 'relative' }}>
+          {/* Left Swipe Indicator */}
+          <View style={{
+            position: 'absolute',
+            left: -16,
+            top: '50%',
+            transform: [{ translateY: -15 }],
+            zIndex: 1,
+          }}>
+            <MaterialCommunityIcons 
+              name="chevron-left" 
+              size={30} 
+              color="#6B7280"
+              style={{ opacity: 0.5 }}
+            />
+          </View>
+
+          {/* Right Swipe Indicator */}
+          <View style={{
+            position: 'absolute',
+            right: -16,
+            top: '50%',
+            transform: [{ translateY: -15 }],
+            zIndex: 1,
+          }}>
+            <MaterialCommunityIcons 
+              name="chevron-right" 
+              size={30} 
+              color="#6B7280"
+              style={{ opacity: 0.5 }}
+            />
+          </View>
+
           <Avatar.Image
             size={80}
             source={{ uri: 'https://example.com/jane-cooper.jpg' }}
+            style={{ marginTop: 20 }}
           />
           <Text 
             variant="headlineSmall" 
@@ -116,6 +149,19 @@ export const ProfileScreen = ({ onBack }) => {
           >
             Senior manager - Production and finance at Papaya private limited
           </Text>
+
+          {/* Scroll Indicator */}
+          <Surface style={{
+            borderRadius: 20,
+            padding: 8,
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            marginBottom: 16,
+          }}>
+            <MaterialCommunityIcons name="chevron-down" size={24} color={theme.colors.primary} />
+            <Text style={{ color: theme.colors.primary, marginLeft: 8 }}>Scroll for more</Text>
+          </Surface>
 
           {/* Social Links */}
           <View style={{ 

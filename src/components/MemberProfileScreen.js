@@ -351,23 +351,79 @@ export const MemberProfileScreen = ({ member, onBack, members, currentIndex: ini
         {...panResponder.panHandlers}
       >
         {/* Profile Info */}
-        <View style={{ alignItems: 'center', paddingHorizontal: 16 }}>
-          {member.avatar ? (
-            <Avatar.Image
-              size={80}
-              source={member.avatar}
-              style={{ backgroundColor: '#F5F7FA' }}
-            />
-          ) : (
-            <Avatar.Icon
-              size={80}
-              icon="account"
-              style={{ backgroundColor: theme.colors.primary }}
-            />
-          )}
+        <View style={{ 
+          alignItems: 'center', 
+          paddingHorizontal: 16,
+          position: 'relative',  // Added for absolute positioning of arrows
+        }}>
+          {/* Avatar Section */}
+          <View style={{
+            width: '100%',
+            marginVertical: 20,
+            alignItems: 'center',  // Center avatar
+            position: 'relative'   // For arrow positioning
+          }}>
+            {/* Left Arrow - Absolute positioned */}
+            {currentSlideIndex > 0 && (
+              <Pressable
+                onPress={() => onChangeIndex(currentSlideIndex - 1)}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.2 : 0.1,
+                  position: 'absolute',
+                  left: -16,  // Align with screen edge
+                  top: '50%',
+                  transform: [{ translateY: -32 }],  // Center vertically (half of icon size)
+                  zIndex: 1
+                })}
+              >
+                <MaterialCommunityIcons 
+                  name="chevron-left" 
+                  size={64} 
+                  color="#666"
+                />
+              </Pressable>
+            )}
+
+            {/* Centered Avatar */}
+            {member.avatar ? (
+              <Avatar.Image
+                size={80}
+                source={member.avatar}
+                style={{ backgroundColor: '#F5F7FA' }}
+              />
+            ) : (
+              <Avatar.Icon
+                size={80}
+                icon="account"
+                style={{ backgroundColor: theme.colors.primary }}
+              />
+            )}
+
+            {/* Right Arrow - Absolute positioned */}
+            {currentSlideIndex < members.length - 1 && (
+              <Pressable
+                onPress={() => onChangeIndex(currentSlideIndex + 1)}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.2 : 0.1,
+                  position: 'absolute',
+                  right: -16,  // Align with screen edge
+                  top: '50%',
+                  transform: [{ translateY: -32 }],  // Center vertically (half of icon size)
+                  zIndex: 1
+                })}
+              >
+                <MaterialCommunityIcons 
+                  name="chevron-right" 
+                  size={64} 
+                  color="#666"
+                />
+              </Pressable>
+            )}
+          </View>
+
           <Text 
             variant="headlineSmall" 
-            style={{ marginTop: 16, marginBottom: 4 }}
+            style={{ marginBottom: 4 }}
           >
             {member.name}
           </Text>
